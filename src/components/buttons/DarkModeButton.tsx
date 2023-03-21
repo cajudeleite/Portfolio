@@ -8,8 +8,9 @@ const DarkModeButton = () => {
 
   useLayoutEffect(() => {
     const preferedTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const localTheme = "theme" in localStorage && localStorage.theme === "dark";
-    const darkTheme = localTheme || preferedTheme;
+    const hasLocalTheme = "theme" in localStorage;
+    const localTheme = localStorage.theme === "dark";
+    const darkTheme = hasLocalTheme ? localTheme : preferedTheme;
 
     setDarkMode(darkTheme);
     if (darkTheme) rootDiv.classList.add("dark");
