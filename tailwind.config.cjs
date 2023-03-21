@@ -59,6 +59,10 @@ module.exports = {
           800: '#5c5850',
           900: '#4c4942'
         }
+      },
+      fontFamily: {
+        exan: ["EXAN", "sans-serif"],
+        nunito: ["Nunito", "sans-serif"]
       }
     },
   },
