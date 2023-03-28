@@ -1,5 +1,7 @@
 import IkedaMap from "./components/fractals/IkedaMap";
 import NavBar from "./components/NavBar";
+import CalculatorDisplay from "./playground/Calculator";
+import { toBinaryArrayPositiveAndNegative } from "./utils/Utils";
 
 const App = () => {
   return (
@@ -8,9 +10,14 @@ const App = () => {
       <NavBar />
       <div className="ml-12">
         <p className="text-2xl">
-          Hello, my name is <span className="text-primary text-3xl font-medium">Nathan</span>. But you can call me
+          Hello, my name is{" "}
+          <span className="text-primary text-3xl font-medium">Nathan</span>. But
+          you can call me
         </p>
         <h1 className="font-exan text-secondary text-8xl">Caju</h1>
+        <br />
+        <br />
+        <CalculatorDisplay data={toBinaryArrayPositiveAndNegative(-1)} />
       </div>
     </div>
   );

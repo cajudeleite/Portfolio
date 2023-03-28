@@ -1,4 +1,15 @@
-import { and, not, nand, or, xor, nor, srLatch, dLatch } from "../utils/Logic";
+import {
+  and,
+  not,
+  nand,
+  or,
+  xor,
+  nor,
+  srLatch,
+  dLatch,
+  fourBitRegister,
+} from "../utils/Logic";
+import { toBinaryArrayPositive } from "../utils/Utils";
 
 describe("\nTesting AND", () => {
   test("a = false, b = false", () => expect(and(false, false)).toBe(false));
@@ -40,55 +51,115 @@ describe("\nTesting NOR", () => {
   test("a = true, b = true", () => expect(nor(true, true)).toBe(false));
 });
 
-const testLatch = srLatch();
+const testSrLatch = srLatch();
 
 describe("\nTesting srLatch", () => {
   test("Should initialize to false", () => {
-    expect(testLatch(false, false)).toBe(false);
+    expect(testSrLatch(false, false)).toBe(false);
   });
 
   test("Should set to true when set is true", () => {
-    expect(testLatch(true, false)).toBe(true);
+    expect(testSrLatch(true, false)).toBe(true);
   });
 
   test("Should reset to false when reset is true", () => {
-    expect(testLatch(false, true)).toBe(false);
+    expect(testSrLatch(false, true)).toBe(false);
   });
 
   test("Should maintain state", () => {
-    expect(testLatch(true, false)).toBe(true);
-    expect(testLatch(false, false)).toBe(true);
-    expect(testLatch(false, true)).toBe(false);
-    expect(testLatch(false, false)).toBe(false);
+    expect(testSrLatch(true, false)).toBe(true);
+    expect(testSrLatch(false, false)).toBe(true);
+    expect(testSrLatch(false, true)).toBe(false);
+    expect(testSrLatch(false, false)).toBe(false);
   });
 });
 
+const testDLatch = dLatch();
+
 describe("\nTesting dLatch", () => {
   test("Should initialize to false", () => {
-    expect(dLatch(false, false, testLatch)).toBe(false);
+    expect(testDLatch(false, false)).toBe(false);
   });
 
   test("Shouldn't store if only data is set", () => {
-    expect(dLatch(true, false, testLatch)).toBe(false);
-    expect(dLatch(false, false, testLatch)).toBe(false);
+    expect(testDLatch(true, false)).toBe(false);
+    expect(testDLatch(false, false)).toBe(false);
   });
 
   test("Should store if both data and store are set", () => {
-    expect(dLatch(true, true, testLatch)).toBe(true);
-    expect(dLatch(true, false, testLatch)).toBe(true);
-    expect(dLatch(false, false, testLatch)).toBe(true);
+    expect(testDLatch(true, true)).toBe(true);
+    expect(testDLatch(true, false)).toBe(true);
+    expect(testDLatch(false, false)).toBe(true);
   });
 
   test("Should keep the stored value if data is toggled", () => {
-    expect(dLatch(true, false, testLatch)).toBe(true);
-    expect(dLatch(false, false, testLatch)).toBe(true);
-    expect(dLatch(false, true, testLatch)).toBe(false);
-    expect(dLatch(true, false, testLatch)).toBe(false);
+    expect(testDLatch(true, false)).toBe(true);
+    expect(testDLatch(false, false)).toBe(true);
+    expect(testDLatch(false, true)).toBe(false);
+    expect(testDLatch(true, false)).toBe(false);
   });
 
   test("Should reset if stored is set", () => {
-    expect(dLatch(true, true, testLatch)).toBe(true);
-    expect(dLatch(false, true, testLatch)).toBe(false);
-    expect(dLatch(false, false, testLatch)).toBe(false);
+    expect(testDLatch(true, true)).toBe(true);
+    expect(testDLatch(false, true)).toBe(false);
+    expect(testDLatch(false, false)).toBe(false);
+  });
+});
+
+const testRegister = fourBitRegister();
+
+describe("\nTesting fourBitRegister", () => {
+  test("Should initialize to false", () => {
+    expect(testRegister(toBinaryArrayPositive(0), false)).toStrictEqual(
+      toBinaryArrayPositive(0)
+    );
+  });
+
+  test("Shouldn't store if only data is set", () => {
+    expect(testRegister(toBinaryArrayPositive(7), false)).toStrictEqual(
+      toBinaryArrayPositive(0)
+    );
+    expect(testRegister(toBinaryArrayPositive(0), false)).toStrictEqual(
+      toBinaryArrayPositive(0)
+    );
+  });
+
+  test("Should store if both data and store are set", () => {
+    expect(testRegister(toBinaryArrayPositive(7), true)).toStrictEqual(
+      toBinaryArrayPositive(7)
+    );
+    expect(testRegister(toBinaryArrayPositive(7), false)).toStrictEqual(
+      toBinaryArrayPositive(7)
+    );
+    expect(testRegister(toBinaryArrayPositive(0), false)).toStrictEqual(
+      toBinaryArrayPositive(7)
+    );
+  });
+
+  test("Should keep the stored value if data is toggled", () => {
+    expect(testRegister(toBinaryArrayPositive(7), false)).toStrictEqual(
+      toBinaryArrayPositive(7)
+    );
+    expect(testRegister(toBinaryArrayPositive(0), false)).toStrictEqual(
+      toBinaryArrayPositive(7)
+    );
+    expect(testRegister(toBinaryArrayPositive(0), true)).toStrictEqual(
+      toBinaryArrayPositive(0)
+    );
+    expect(testRegister(toBinaryArrayPositive(7), false)).toStrictEqual(
+      toBinaryArrayPositive(0)
+    );
+  });
+
+  test("Should reset if stored is set", () => {
+    expect(testRegister(toBinaryArrayPositive(7), true)).toStrictEqual(
+      toBinaryArrayPositive(7)
+    );
+    expect(testRegister(toBinaryArrayPositive(3), true)).toStrictEqual(
+      toBinaryArrayPositive(3)
+    );
+    expect(testRegister(toBinaryArrayPositive(0), false)).toStrictEqual(
+      toBinaryArrayPositive(3)
+    );
   });
 });

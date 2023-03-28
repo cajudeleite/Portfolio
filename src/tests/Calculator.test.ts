@@ -1,5 +1,4 @@
 import { adder, fourBitAdder, fourBitALU } from "../playground/Calculator";
-import { FourBitBinary } from "../types";
 import {
   toBinaryArrayPositive,
   toBinaryArrayPositiveAndNegative,
