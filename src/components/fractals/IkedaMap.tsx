@@ -37,7 +37,7 @@ const IkedaMap = () => {
     }
   };
 
-  return <Sketch setup={setup} draw={draw} className="absolute top-0" />;
+  return <Sketch setup={setup} draw={draw} />;
 };
 
 export default IkedaMap;

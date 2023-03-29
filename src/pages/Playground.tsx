@@ -4,10 +4,11 @@ import { CalculatorV1 } from "../playground/Calculator";
 
 const Playground = () => {
   return (
-    <div>
-      <LorenzAttractor />
-      <StrictMode>{/* <CalculatorV1 /> */}</StrictMode>
-    </div>
+    <section className="min-h-screen flex items-center">
+      <StrictMode>
+        <CalculatorV1 />
+      </StrictMode>
+    </section>
   );
 };
 

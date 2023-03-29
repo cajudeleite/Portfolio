@@ -6,8 +6,7 @@ import { toBinaryArrayPositiveAndNegative } from "../utils/Utils";
 
 const Home = () => {
   return (
-    <>
-      <IkedaMap />
+    <section className="min-h-screen flex items-center">
       <StrictMode>
         <div className="ml-12">
           <p className="text-2xl">
@@ -18,7 +17,7 @@ const Home = () => {
           <h1 className="font-exan text-secondary text-8xl">Caju</h1>
         </div>
       </StrictMode>
-    </>
+    </section>
   );
 };
 
