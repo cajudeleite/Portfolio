@@ -10,9 +10,11 @@ let b = 0;
 let c = 0;
 let n = 0;
 
-const IkedaMap = ({ className }: { className?: string }) => {
+const IkedaMapAttractor = () => {
   const setup = (p5: p5Types, canvasParentRef: Element) => {
-    p5.createCanvas(window.innerWidth, window.innerHeight).parent(canvasParentRef);
+    p5.createCanvas(window.innerWidth, window.innerHeight).parent(
+      canvasParentRef
+    );
     p5.background(0, 0, 0, 0);
     p5.stroke(57, 155, 27);
     p5.noFill();
@@ -35,7 +37,7 @@ const IkedaMap = ({ className }: { className?: string }) => {
     }
   };
 
-  return <Sketch setup={setup} draw={draw} className={className} />;
+  return <Sketch setup={setup} draw={draw} />;
 };
 
-export default IkedaMap;
+export default IkedaMapAttractor;
