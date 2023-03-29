@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { FourBitBinary } from "../types";
 import { and, nand, nor, not, or, xor } from "../utils/Logic";
 
@@ -22,6 +23,44 @@ export const adder = (a: boolean, b: boolean, carryIn: boolean) => {
 
   // Return an object containing the resulting sum and carry bits
   return { sum, carry };
+};
+
+const BitInput = ({
+  bitValue,
+  flipBit,
+  label,
+}: {
+  bitValue: boolean;
+  flipBit: () => void;
+  label?: string;
+}) => (
+  <div className="relative">
+    <button
+      className={`h-8 w-8 relative rounded-full border-4 border-gray-500 ${
+        bitValue ? "bg-red-500" : "bg-gray-700"
+      }`}
+      onClick={flipBit}
+    />
+    <span className="absolute right-full">{label}</span>
+  </div>
+);
+
+export const CalculatorV1 = () => {
+  const [inputA, setInputA] = useState(false);
+  const [inputB, setInputB] = useState(false);
+  const [inputCarry, setInputCarry] = useState(false);
+
+  return (
+    <div className="flex flex-col ml-16">
+      <BitInput bitValue={inputA} flipBit={() => setInputA(not(inputA))} />
+      <BitInput bitValue={inputB} flipBit={() => setInputB(not(inputB))} />
+      <BitInput
+        bitValue={inputCarry}
+        flipBit={() => setInputCarry(not(inputCarry))}
+        label="Carry"
+      />
+    </div>
+  );
 };
 
 /**
