@@ -10,7 +10,7 @@ let b = 0;
 let c = 0;
 let n = 0;
 
-const IkedaMap = () => {
+const IkedaMapAttractor = () => {
   const setup = (p5: p5Types, canvasParentRef: Element) => {
     p5.createCanvas(window.innerWidth, window.innerHeight).parent(
       canvasParentRef
@@ -37,7 +37,7 @@ const IkedaMap = () => {
     }
   };
 
-  return <Sketch setup={setup} draw={draw} className="absolute top-0" />;
+  return <Sketch setup={setup} draw={draw} />;
 };
 
-export default IkedaMap;
+export default IkedaMapAttractor;
