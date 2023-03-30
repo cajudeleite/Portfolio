@@ -1,31 +1,26 @@
 import { useLayoutEffect, useState } from "react";
 import MoonIcon from "../../assets/icons/MoonIcon";
 import SunIcon from "../../assets/icons/SunIcon";
+import { useDarkMode } from "../../stores/darkModeStore";
 
 const DarkModeButton = () => {
-  const [darkMode, setDarkMode] = useState(false);
-  const rootDiv = document.getElementById("root") as HTMLDivElement;
-
-  useLayoutEffect(() => {
-    const preferedTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const hasLocalTheme = "theme" in localStorage;
-    const localTheme = localStorage.theme === "dark";
-    const darkTheme = hasLocalTheme ? localTheme : preferedTheme;
-
-    setDarkMode(darkTheme);
-    if (darkTheme) rootDiv.classList.add("dark");
-  }, []);
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    localStorage.setItem("theme", !darkMode ? "dark" : "light");
-    rootDiv.classList.toggle("dark");
-  };
+  const { darkMode, toggleDarkMode } = useDarkMode();
 
   return (
-    <button onClick={toggleDarkMode} className="relative hover:scale-125 transform-gpu transition duration-200 ease-in">
-      <SunIcon className={`transform-gpu transition-opacity duration-300 ${darkMode ? "opacity-100" : "opacity-0"}`} />
-      <MoonIcon className={`absolute top-0 transform-gpu transition-opacity duration-300 ${darkMode ? "opacity-0" : "opacity-100"}`} />
+    <button
+      onClick={toggleDarkMode}
+      className="relative hover:scale-125 transform-gpu transition duration-200 ease-in"
+    >
+      <SunIcon
+        className={`transform-gpu transition-opacity duration-300 ${
+          darkMode ? "opacity-100" : "opacity-0"
+        }`}
+      />
+      <MoonIcon
+        className={`absolute top-0 transform-gpu transition-opacity duration-300 ${
+          darkMode ? "opacity-0" : "opacity-100"
+        }`}
+      />
     </button>
   );
 };

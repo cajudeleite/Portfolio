@@ -2,8 +2,10 @@ import { StrictMode, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import { RoutePath, routerElements } from "../router";
+import { useDarkMode } from "../stores/darkModeStore";
 
 const App = () => {
+  const { darkMode } = useDarkMode();
   const navigate = useNavigate();
   const location = useLocation();
   const [previousRoute, setPreviousRoute] = useState<RoutePath>();
@@ -39,7 +41,9 @@ const App = () => {
 
   return (
     <div
-      className="h-full w-full relative flex flex-col justify-center scroll-smooth"
+      className={`h-full w-full relative flex flex-col justify-center scroll-smooth bg-light text-dark font-nunito transition-colors duration-500 ${
+        darkMode ? "dark" : ""
+      }`}
       onWheel={(event) => handleScroll(event.deltaY)}
     >
       <NavBar navigate={handleRouteChange} />
