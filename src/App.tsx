@@ -1,8 +1,8 @@
 import { StrictMode, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import NavBar from "../components/NavBar";
-import { RoutePath, routerElements } from "../router";
-import { useDarkMode } from "../stores/darkModeStore";
+import NavBar from "./components/NavBar";
+import { RoutePath, routerElements } from "./router";
+import { useDarkMode } from "./stores/darkModeStore";
 
 const App = () => {
   const { darkMode } = useDarkMode();
@@ -56,7 +56,7 @@ const App = () => {
       </div>
       <StrictMode>
         <section
-          className={`absolute top-0 min-h-screen flex flex-col justify-center ml-12 ${
+          className={`absolute top-0 min-h-screen flex flex-col justify-center mx-4 md:mx-12 ${
             previousRoute
               ? scrollUp
                 ? "slide-out-bottom"
@@ -67,7 +67,7 @@ const App = () => {
           {previousRoute && <>{routerElements[previousRoute].element}</>}
         </section>
         <section
-          className={`absolute top-0 min-h-screen flex flex-col justify-center ml-12 ${
+          className={`absolute top-0 min-h-screen flex flex-col justify-center mx-4 md:mx-12 ${
             previousRoute ? (scrollUp ? "slide-in-top" : "slide-in-bottom") : ""
           }`}
         >

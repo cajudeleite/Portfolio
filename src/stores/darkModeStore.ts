@@ -5,9 +5,14 @@ interface DarkModeState {
   toggleDarkMode: () => void;
 }
 
-const rootDiv = document.getElementById("root") as HTMLDivElement;
-
 export const useDarkMode = create<DarkModeState>((set) => ({
-  darkMode: window.matchMedia("(prefers-color-scheme: dark)").matches,
-  toggleDarkMode: () => set((state) => ({ darkMode: !state.darkMode })),
+  darkMode:
+    "theme" in localStorage
+      ? localStorage.theme === "dark"
+      : window.matchMedia("(prefers-color-scheme: dark)").matches,
+  toggleDarkMode: () =>
+    set((state) => {
+      localStorage.setItem("theme", !state.darkMode ? "dark" : "light");
+      return { darkMode: !state.darkMode };
+    }),
 }));

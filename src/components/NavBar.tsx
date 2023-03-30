@@ -1,4 +1,4 @@
-import { RoutePath } from "../router";
+import { RoutePath, routerElements } from "../router";
 import BurgerMenuButton from "./buttons/BurgerMenuButton";
 import DarkModeButton from "./buttons/DarkModeButton";
 
@@ -9,15 +9,22 @@ const NavBar = ({ navigate }: { navigate: (route: RoutePath) => void }) => {
         Caju
       </button>
       <div className="flex-grow" />
-      <button
-        onClick={() => navigate("/aboutme")}
-        className="text-lg hidden md:block"
-      >
-        About Me
-      </button>
-      <BurgerMenuButton />
-      {/* <button onClick={() => navigate("/playground")}>Playground</button> */}
-      <DarkModeButton />
+      {Object.entries(routerElements).map(([path, { title }]) => {
+        if (title)
+          return (
+            <button
+              key={path}
+              onClick={() => navigate(path as RoutePath)}
+              className="text-lg hidden md:block"
+            >
+              {title}
+            </button>
+          );
+      })}
+      <BurgerMenuButton navigate={navigate} />
+      <div className="hidden md:block">
+        <DarkModeButton />
+      </div>
     </section>
   );
 };

@@ -9,7 +9,7 @@ const DarkModeButton = () => {
   return (
     <button
       onClick={toggleDarkMode}
-      className="relative hover:scale-125 transform-gpu transition duration-200 ease-in"
+      className="relative h-8 hover:scale-125 transform-gpu transition duration-200 ease-in"
     >
       <SunIcon
         className={`transform-gpu transition-opacity duration-300 ${
