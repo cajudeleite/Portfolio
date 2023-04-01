@@ -8,8 +8,8 @@ import {
   srLatch,
   dLatch,
   fourBitRegister,
-} from "../utils/Logic";
-import { toBinaryArrayPositive } from "../utils/Utils";
+} from "../utils/logic";
+import { toBinaryArrayPositive } from "../utils/utils";
 
 describe("\nTesting AND", () => {
   test("a = false, b = false", () => expect(and(false, false)).toBe(false));

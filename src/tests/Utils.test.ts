@@ -1,7 +1,7 @@
 import {
   toBinaryArrayPositive,
   toBinaryArrayPositiveAndNegative,
-} from "../utils/Utils";
+} from "../utils/utils";
 
 describe("\nTesting toBinaryArrayPositive", () => {
   test("11", () =>

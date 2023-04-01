@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FourBitBinary } from "../types";
-import { and, nand, nor, not, or, xor } from "../utils/Logic";
+import { and, nand, nor, not, or, xor } from "../utils/logic";
 
 /**
  * Performs binary addition of two bits and a carry bit

@@ -1,7 +1,6 @@
-import { useLayoutEffect, useState } from "react";
 import MoonIcon from "../../assets/icons/MoonIcon";
 import SunIcon from "../../assets/icons/SunIcon";
-import { useDarkMode } from "../../stores/darkModeStore";
+import useDarkMode from "../../stores/darkModeStore";
 
 const DarkModeButton = () => {
   const { darkMode, toggleDarkMode } = useDarkMode();

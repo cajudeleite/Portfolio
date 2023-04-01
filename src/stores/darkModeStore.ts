@@ -5,7 +5,7 @@ interface DarkModeState {
   toggleDarkMode: () => void;
 }
 
-export const useDarkMode = create<DarkModeState>((set) => ({
+const useDarkMode = create<DarkModeState>((set) => ({
   darkMode:
     "theme" in localStorage
       ? localStorage.theme === "dark"
@@ -16,3 +16,5 @@ export const useDarkMode = create<DarkModeState>((set) => ({
       return { darkMode: !state.darkMode };
     }),
 }));
+
+export default useDarkMode;

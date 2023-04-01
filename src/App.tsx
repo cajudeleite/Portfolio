@@ -1,8 +1,10 @@
 import { StrictMode, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import BurgerMenuButton from "./components/buttons/BurgerMenuButton";
 import NavBar from "./components/NavBar";
+import SideBar from "./components/SideBar";
 import { RoutePath, routerElements } from "./router";
-import { useDarkMode } from "./stores/darkModeStore";
+import useDarkMode from "./stores/darkModeStore";
 
 const App = () => {
   const { darkMode } = useDarkMode();
@@ -13,6 +15,9 @@ const App = () => {
     location.pathname as RoutePath
   );
   const [scrollUp, setScrollUp] = useState(false);
+  const [previousTouchPosition, setPreviousTouchPosition] = useState<
+    number | null
+  >(null);
 
   const handleRouteChange = (route: RoutePath) => {
     setPreviousRoute(currentRoute);
@@ -22,6 +27,17 @@ const App = () => {
       setCurrentRoute(route);
       setScrollUp(false);
     }, 1000);
+  };
+
+  const handleTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
+    const currentTouchPosition = event.touches[0].clientY;
+
+    if (previousTouchPosition !== null) {
+      const deltaY = currentTouchPosition - previousTouchPosition;
+      handleScroll(deltaY);
+    }
+
+    setPreviousTouchPosition(currentTouchPosition);
   };
 
   const handleScroll = (deltaY: number) => {
@@ -45,8 +61,11 @@ const App = () => {
         darkMode ? "dark" : ""
       }`}
       onWheel={(event) => handleScroll(event.deltaY)}
+      onTouchMove={(event) => handleTouchMove(event)}
     >
+      <BurgerMenuButton navigate={handleRouteChange} />
       <NavBar navigate={handleRouteChange} />
+      <SideBar />
       <div
         className={`absolute top-0 ${
           previousRoute ? (scrollUp ? "fade-out-bottom" : "fade-out-top") : ""
