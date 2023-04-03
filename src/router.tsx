@@ -5,23 +5,34 @@ import AboutMe from "./pages/AboutMe";
 import Home from "./pages/Home";
 import Playground from "./pages/Playground";
 
-export const routerElements = {
+type RouteElement = {
+  element: React.ReactElement;
+  background: React.ReactElement;
+  nextRoute?: string;
+  previousRoute?: string;
+  title?: string;
+};
+
+export type RoutePath = "/" | "/aboutme";
+
+type RouterElements = {
+  [key in RoutePath]: RouteElement;
+};
+
+export const routerElements: RouterElements = {
   "/": {
     element: <Home />,
     background: <IkedaMapAttractor />,
-    previousRoute: null,
     nextRoute: "/aboutme",
   },
   "/aboutme": {
     element: <AboutMe />,
     background: <AizawaAttractor />,
     previousRoute: "/",
-    nextRoute: null,
+    title: "About Me",
   },
   // "/playground": {
   //   element: <Playground />,
   //   background: <LorenzAttractor />,
   // },
 };
-
-export type RoutePath = keyof typeof routerElements;

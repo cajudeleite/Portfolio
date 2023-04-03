@@ -1,6 +1,7 @@
 import p5Types from "p5";
 import { useEffect, useRef } from "react";
 import Sketch from "react-p5";
+import useFpsThreshold from "../../stores/fpsThresholdStore";
 
 let x = 0.1;
 let y = 0;
@@ -15,10 +16,10 @@ let points: { x: number; y: number; z: number }[] = [];
 let scale: number;
 let angleX: number;
 let angleY: number;
-const thresholdFPS = 20;
 const iterationThreshold = 100;
 
 const AizawaAttractor = () => {
+  const { fpsThreshold } = useFpsThreshold();
   const iterationsRef = useRef(0);
 
   const setup = (p5: p5Types, canvasParentRef: Element) => {
@@ -63,7 +64,7 @@ const AizawaAttractor = () => {
     p5.endShape();
 
     const fps = p5.frameRate();
-    if (fps < thresholdFPS && iterationsRef.current > iterationThreshold) {
+    if (fps < fpsThreshold && iterationsRef.current > iterationThreshold) {
       p5.noLoop();
     }
   };
