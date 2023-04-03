@@ -1,12 +1,14 @@
+import { title } from "../utils/classNameLibrary";
+
 const Home = () => {
   return (
     <>
-      <p className="text-2xl">
+      <h2 className="text-xl md:text-2xl">
         Hello, my name is{" "}
         <span className="text-primary text-3xl font-medium">Nathan</span>, but
         you can call me
-      </p>
-      <h1 className="font-exan text-secondary text-8xl">Caju</h1>
+      </h2>
+      <h1 className={`text-secondary ${title}`}>Caju</h1>
     </>
   );
 };
