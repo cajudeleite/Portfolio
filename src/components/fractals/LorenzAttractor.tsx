@@ -1,6 +1,7 @@
 import p5Types from "p5";
 import { useEffect, useRef } from "react";
 import Sketch from "react-p5";
+import useFpsThreshold from "../../stores/fpsThresholdStore";
 
 let x = 0.01;
 let y = 0;
@@ -11,10 +12,10 @@ const beta = 8 / 3;
 let points: { x: number; y: number; z: number }[] = [];
 let scale: number;
 let angleY: number;
-const thresholdFPS = 20;
 const iterationThreshold = 100;
 
 const LorenzAttractor = () => {
+  const { fpsThreshold } = useFpsThreshold();
   const iterationsRef = useRef(0);
 
   const setup = (p5: p5Types, canvasParentRef: Element) => {
@@ -53,7 +54,7 @@ const LorenzAttractor = () => {
     p5.endShape();
 
     const fps = p5.frameRate();
-    if (fps < thresholdFPS && iterationsRef.current > iterationThreshold) {
+    if (fps < fpsThreshold && iterationsRef.current > iterationThreshold) {
       p5.noLoop();
     }
   };

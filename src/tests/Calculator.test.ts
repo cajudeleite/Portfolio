@@ -2,7 +2,7 @@ import { adder, fourBitAdder, fourBitALU } from "../playground/Calculator";
 import {
   toBinaryArrayPositive,
   toBinaryArrayPositiveAndNegative,
-} from "../utils/Utils";
+} from "../utils/utils";
 
 const testAdder = <T>(
   functionToTest: (a: T, b: T, carryIn: boolean) => { sum: T; carry: boolean },
