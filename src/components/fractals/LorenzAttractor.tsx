@@ -3,16 +3,16 @@ import { useEffect, useRef } from "react";
 import Sketch from "react-p5";
 import useFpsThreshold from "../../stores/fpsThresholdStore";
 
-let x = 0.01;
-let y = 0;
-let z = 0;
+const iterationThreshold = 100;
 const sigma = 10;
 const rho = 28;
 const beta = 8 / 3;
+let x = 0.01;
+let y = 0;
+let z = 0;
 let points: { x: number; y: number; z: number }[] = [];
 let scale: number;
 let angleY: number;
-const iterationThreshold = 100;
 
 const LorenzAttractor = () => {
   const { fpsThreshold } = useFpsThreshold();
