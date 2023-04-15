@@ -16,7 +16,7 @@ let points: { x: number; y: number; z: number }[] = [];
 let scale: number;
 let angleX: number;
 let angleY: number;
-const iterationThreshold = 100;
+const minimumIterations = 100;
 
 const AizawaAttractor = () => {
   const { fpsThreshold } = useFpsThreshold();
@@ -64,7 +64,7 @@ const AizawaAttractor = () => {
     p5.endShape();
 
     const fps = p5.frameRate();
-    if (fps < fpsThreshold && iterationsRef.current > iterationThreshold) {
+    if (fps < fpsThreshold && iterationsRef.current > minimumIterations) {
       p5.noLoop();
     }
   };

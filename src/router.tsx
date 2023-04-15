@@ -5,6 +5,7 @@ import AboutMe from "./pages/AboutMe";
 import Home from "./pages/Home";
 import Playground from "./pages/Playground";
 import Skills from "./pages/Skills";
+import { isMobile } from "./utils/utils";
 
 export type RoutePath = "/" | "/aboutme" | "/skills";
 
@@ -35,7 +36,7 @@ export const routerElements: RouterElements = {
   },
   "/skills": {
     element: <Skills />,
-    background: <LorenzAttractor />,
+    background: isMobile ? <></> : <LorenzAttractor />,
     previousRoute: "/aboutme",
     title: "Skills",
   },

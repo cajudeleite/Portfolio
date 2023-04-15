@@ -73,30 +73,26 @@ const App = () => {
       >
         {routerElements[currentRoute].background}
       </div>
-      <StrictMode>
-        <section
-          className={`absolute top-0 min-h-screen flex flex-col justify-center mx-4 md:mx-12 ${
-            previousRoute
-              ? scrollUp
-                ? "slide-out-bottom"
-                : "slide-out-top"
-              : ""
-          }`}
-        >
-          {previousRoute && <>{routerElements[previousRoute].element}</>}
-        </section>
-        <section
-          className={`absolute top-0 min-h-screen flex flex-col justify-center mx-4 md:mx-12 ${
-            previousRoute ? (scrollUp ? "slide-in-top" : "slide-in-bottom") : ""
-          }`}
-        >
-          <Routes>
-            {Object.entries(routerElements).map(([path, { element }]) => (
-              <Route key={path} path={path} element={element} />
-            ))}
-          </Routes>
-        </section>
-      </StrictMode>
+      {/* <StrictMode> */}
+      <section
+        className={`absolute top-0 h-screen flex flex-col justify-center mx-4 md:mx-12 ${
+          previousRoute ? (scrollUp ? "slide-out-bottom" : "slide-out-top") : ""
+        }`}
+      >
+        {previousRoute && <>{routerElements[previousRoute].element}</>}
+      </section>
+      <section
+        className={`absolute top-0 min-h-screen flex flex-col justify-center mx-4 md:mx-12 ${
+          previousRoute ? (scrollUp ? "slide-in-top" : "slide-in-bottom") : ""
+        }`}
+      >
+        <Routes>
+          {Object.entries(routerElements).map(([path, { element }]) => (
+            <Route key={path} path={path} element={element} />
+          ))}
+        </Routes>
+      </section>
+      {/* </StrictMode> */}
     </div>
   );
 };

@@ -55,3 +55,8 @@ export const toBinaryArrayPositiveAndNegative = (
   // Convert the string of binary digits to a binary array
   return temp.split("").map((bit) => bit === "1") as FourBitBinary;
 };
+
+/**
+ * Boolean that returns true if the window width is bellow the mobile size
+ */
+export const isMobile = window.innerWidth < 768;
