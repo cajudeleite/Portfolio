@@ -1,6 +1,7 @@
 import AizawaAttractor from "./components/fractals/AizawaAttractor";
 import IkedaMapAttractor from "./components/fractals/IkedaMapAttractor";
 import LorenzAttractor from "./components/fractals/LorenzAttractor";
+import NoseHooverAttractor from "./components/fractals/NoseHooverAttractor";
 import AboutMe from "./pages/AboutMe";
 import Home from "./pages/Home";
 import Playground from "./pages/Playground";
@@ -36,7 +37,7 @@ export const routerElements: RouterElements = {
   },
   "/skills": {
     element: <Skills />,
-    background: isMobile ? <></> : <LorenzAttractor />,
+    background: <NoseHooverAttractor />,
     previousRoute: "/aboutme",
     title: "Skills",
   },

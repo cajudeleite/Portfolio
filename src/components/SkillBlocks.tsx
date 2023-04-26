@@ -15,7 +15,7 @@ const SkillBlocks = () => {
 
     return (
       <p
-        className="border-2 flex justify-center items-center cursor-pointer text-lg font-semibold"
+        className="border-2 flex justify-center items-center cursor-pointer md:text-lg font-semibold"
         style={{
           height: size,
           width: size,
