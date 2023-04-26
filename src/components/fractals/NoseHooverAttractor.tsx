@@ -3,22 +3,17 @@ import { useEffect, useRef } from "react";
 import Sketch from "react-p5";
 import useFpsThreshold from "../../stores/fpsThresholdStore";
 
-let x = 0.1;
+const iterationThreshold = 100;
+const a = 1.5;
+let x = 0.01;
 let y = 0;
 let z = 0;
-const a = 0.95;
-const b = 0.7;
-const c = 0.6;
-const d = 3.5;
-const e = 0.25;
-const f = 0.1;
 let points: { x: number; y: number; z: number }[] = [];
 let scale: number;
 let angleX: number;
 let angleY: number;
-const minimumIterations = 100;
 
-const AizawaAttractor = () => {
+const NoseHooverAttractor = () => {
   const { fpsThreshold } = useFpsThreshold();
   const iterationsRef = useRef(0);
 
@@ -27,10 +22,8 @@ const AizawaAttractor = () => {
       canvasParentRef
     );
     p5.background(0, 0, 0, 0);
-    p5.stroke(202, 94, 4);
-    p5.noFill();
     p5.frameRate(60);
-    scale = p5.random(179, 269);
+    scale = p5.random(50, 100);
     angleX = p5.random(-p5.PI, p5.PI);
     angleY = p5.random(-p5.PI, p5.PI);
   };
@@ -42,20 +35,19 @@ const AizawaAttractor = () => {
     p5.rotateY(angleY);
 
     const dt = 0.01;
-    const dx = (z - b) * x - d * y;
-    const dy = d * x + (z - b) * y;
-    const dz =
-      c +
-      a * z -
-      (z * z * z) / 3 -
-      (x * x + y * y) * (1 + e * z) +
-      f * z * x * x * x;
-    x += dx * dt;
-    y += dy * dt;
-    z += dz * dt;
+    const dx = y * dt;
+    const dy = (-x + y * z) * dt;
+    const dz = (a - y ** 2) * dt;
+
+    x += dx;
+    y += dy;
+    z += dz;
 
     points.push({ x, y, z });
     iterationsRef.current += 1;
+
+    p5.stroke(57, 155, 27);
+    p5.noFill();
 
     p5.beginShape();
     for (let i = 0; i < points.length; i++) {
@@ -64,7 +56,7 @@ const AizawaAttractor = () => {
     p5.endShape();
 
     const fps = p5.frameRate();
-    if (fps < fpsThreshold && iterationsRef.current > minimumIterations) {
+    if (fps < fpsThreshold && iterationsRef.current > iterationThreshold) {
       p5.noLoop();
     }
   };
@@ -78,4 +70,4 @@ const AizawaAttractor = () => {
   return <Sketch setup={setup} draw={draw} />;
 };
 
-export default AizawaAttractor;
+export default NoseHooverAttractor;
