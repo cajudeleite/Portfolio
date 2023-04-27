@@ -18,8 +18,8 @@ const IkedaMapAttractor = () => {
     p5.background(0, 0, 0, 0);
     p5.stroke(57, 155, 27);
     p5.noFill();
-    a = p5.random(0.7, 0.9);
-    b = p5.random(0.7, 0.9);
+    a = p5.random(0.8, 0.9);
+    b = p5.random(0.8, 0.9);
     c = p5.random(6, 11);
     n = p5.random(19, 97);
   };
