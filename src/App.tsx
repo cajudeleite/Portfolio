@@ -57,7 +57,7 @@ const App = () => {
 
   return (
     <div
-      className={`h-full w-full relative flex flex-col justify-center scroll-smooth bg-light text-dark font-nunito transition-colors duration-500 ${
+      className={`h-full w-full relative flex flex-col justify-center scroll-smooth bg-light text-dark font-nunito transition-colors duration-500 select-none ${
         darkMode ? "dark" : ""
       }`}
       onWheel={(event) => handleScroll(event.deltaY)}
