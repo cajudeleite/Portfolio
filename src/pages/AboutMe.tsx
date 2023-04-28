@@ -5,14 +5,14 @@ const AboutMe = () => {
     <>
       <h1 className={`text-primary ${title}`}>About Me</h1>
       <p className={paragraph}>
-        Almost starting{" "}
-        <span className="text-secondary text-xl font-medium">42</span> computer
-        science school.
+        Studing at{" "}
+        <span className="text-secondary text-xl font-medium">École 42</span>{" "}
+        computer science school in Paris.
       </p>
       <p className={paragraph}>
-        Looking for a{" "}
+        Open to{" "}
         <span className="text-primary text-xl font-medium">freelance</span>{" "}
-        opportunity where I can use my skills.
+        projects where I can use my skills.
       </p>
       <p className={paragraph}>
         Would like to carry on with my{" "}
