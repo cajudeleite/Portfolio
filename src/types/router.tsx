@@ -1,16 +1,12 @@
-import StrangeAttractor from "../components/StrangeAttractor";
-import AizawaAttractor from "../components/fractals/AizawaAttractor";
-import HalvorsenAttractor from "../components/fractals/HalvorsenAttractor";
+import StrangeAttractor from "../components/fractals/StrangeAttractor";
 import IkedaMapAttractor from "../components/fractals/IkedaMapAttractor";
-import LorenzAttractor from "../components/fractals/LorenzAttractor";
-import NoseHooverAttractor from "../components/fractals/NoseHooverAttractor";
 import AboutMe from "../pages/AboutMe";
 import Home from "../pages/Home";
-import Playground from "../pages/Playground";
 import Skills from "../pages/Skills";
-import { aizawa, noseHoover } from "../utils/strangeAttractors";
+import WorkExperience from "../pages/WorkExperience";
+import { aizawa, lorenz, noseHoover } from "../utils/strangeAttractors";
 
-export type RoutePath = "/" | "/aboutme" | "/skills";
+export type RoutePath = "/" | "/about" | "/skill" | "/work";
 
 type RouteElement = {
   element: React.ReactElement;
@@ -28,20 +24,27 @@ export const routerElements: RouterElements = {
   "/": {
     element: <Home />,
     background: <IkedaMapAttractor />,
-    nextRoute: "/aboutme",
+    nextRoute: "/about",
   },
-  "/aboutme": {
+  "/about": {
     element: <AboutMe />,
     background: <StrangeAttractor props={aizawa} />,
     previousRoute: "/",
-    nextRoute: "/skills",
+    nextRoute: "/skill",
     title: "About Me",
   },
-  "/skills": {
+  "/skill": {
     element: <Skills />,
-    background: <StrangeAttractor props={noseHoover} />,
-    previousRoute: "/aboutme",
+    background: <StrangeAttractor props={lorenz} />,
+    previousRoute: "/about",
+    nextRoute: "/work",
     title: "Skills",
+  },
+  "/work": {
+    element: <WorkExperience />,
+    background: <StrangeAttractor props={noseHoover} />,
+    previousRoute: "/skill",
+    title: "Work Experience",
   },
   // "/playground": {
   //   element: <Playground />,

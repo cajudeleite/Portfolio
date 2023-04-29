@@ -15,9 +15,24 @@ export const aizawa: StrangeAttractorProps = {
     },
 }
 
+export const lorenz: StrangeAttractorProps = {
+    name: "Lorenz",
+    strokeColor: [57, 155, 27],
+    scale: [11, 17],
+    dx(x, y, z) {
+        return 10 * (y - x);
+    },
+    dy(x, y, z) {
+        return (x * (28 - z) - y);
+    },
+    dz(x, y, z) {
+        return (x * y - (8 / 3) * z)
+    },
+}
+
 export const noseHoover: StrangeAttractorProps = {
     name: "Nose Hoover",
-    strokeColor: [57, 155, 27],
+    strokeColor: [202, 94, 4],
     scale: [50, 100],
     dx(x, y, z) {
         return y;

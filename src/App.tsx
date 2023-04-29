@@ -1,4 +1,4 @@
-import { StrictMode, useState } from "react";
+import { useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import BurgerMenuButton from "./components/buttons/BurgerMenuButton";
 import NavBar from "./components/NavBar";

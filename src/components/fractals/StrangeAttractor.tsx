@@ -1,36 +1,45 @@
-import p5Types from "p5";
-import { useEffect, useRef } from "react";
-import Sketch from "react-p5";
+import { useEffect, useRef, useState } from "react";
 import useFpsThreshold from "../../stores/fpsThresholdStore";
+import p5Types from "p5";
+import Sketch from "react-p5";
+import { StrangeAttractorProps } from "../../types/attractor";
 
-let x = 0.1;
-let y = 0;
-let z = 0;
-const a = 0.95;
-const b = 0.7;
-const c = 0.6;
-const d = 3.5;
-const e = 0.25;
-const f = 0.1;
+const minimumIterations = 100;
 let points: { x: number; y: number; z: number }[] = [];
 let scale: number;
 let angleX: number;
 let angleY: number;
-const minimumIterations = 100;
+let x = 0.1;
+let y = 0;
+let z = 0;
 
-const AizawaAttractor = () => {
+const StrangeAttractor = ({ props }: { props: StrangeAttractorProps }) => {
   const { fpsThreshold } = useFpsThreshold();
   const iterationsRef = useRef(0);
+
+  useEffect(() => {
+    points = [];
+    x = 0.1;
+    y = 0;
+    z = 0;
+
+    return () => {
+      points = [];
+      x = 0.1;
+      y = 0;
+      z = 0;
+    };
+  }, [props]);
 
   const setup = (p5: p5Types, canvasParentRef: Element) => {
     p5.createCanvas(window.innerWidth, window.innerHeight, p5.WEBGL).parent(
       canvasParentRef
     );
     p5.background(0, 0, 0, 0);
-    p5.stroke(202, 94, 4);
+    p5.stroke(props.strokeColor);
     p5.noFill();
     p5.frameRate(60);
-    scale = p5.random(179, 269);
+    scale = p5.random(props.scale);
     angleX = p5.random(-p5.PI, p5.PI);
     angleY = p5.random(-p5.PI, p5.PI);
   };
@@ -42,17 +51,9 @@ const AizawaAttractor = () => {
     p5.rotateY(angleY);
 
     const dt = 0.01;
-    const dx = (z - b) * x - d * y;
-    const dy = d * x + (z - b) * y;
-    const dz =
-      c +
-      a * z -
-      (z * z * z) / 3 -
-      (x * x + y * y) * (1 + e * z) +
-      f * z * x * x * x;
-    x += dx * dt;
-    y += dy * dt;
-    z += dz * dt;
+    x += props.dx(x, y, z) * dt;
+    y += props.dy(x, y, z) * dt;
+    z += props.dz(x, y, z) * dt;
 
     points.push({ x, y, z });
     iterationsRef.current += 1;
@@ -69,13 +70,7 @@ const AizawaAttractor = () => {
     }
   };
 
-  useEffect(() => {
-    return () => {
-      points = [];
-    };
-  }, []);
-
-  return <Sketch setup={setup} draw={draw} />;
+  return <Sketch key={props.name} setup={setup} draw={draw} />;
 };
 
-export default AizawaAttractor;
+export default StrangeAttractor;
