@@ -3,7 +3,7 @@ import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import BurgerMenuButton from "./components/buttons/BurgerMenuButton";
 import NavBar from "./components/NavBar";
 import SideBar from "./components/SideBar";
-import { RoutePath, routerElements } from "./router";
+import { RoutePath, routerElements } from "./types/router";
 import useDarkMode from "./stores/darkModeStore";
 
 const App = () => {

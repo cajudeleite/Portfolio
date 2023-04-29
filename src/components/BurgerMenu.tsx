@@ -1,4 +1,5 @@
-import { RoutePath, routerElements } from "../router";
+import { useEffect } from "react";
+import { RoutePath, routerElements } from "../types/router";
 import SettingsButton from "./buttons/SettingsButton";
 
 const BurgerMenu = ({
@@ -8,9 +9,23 @@ const BurgerMenu = ({
   burgerRef: HTMLDivElement;
   navigate: (route: RoutePath) => void;
 }) => {
+  const button = burgerRef.children[0];
+
+  useEffect(() => {
+    window.addEventListener("resize", closeSideBarOnResize, false);
+  }, []);
+
+  const closeSideBar = () => (button as HTMLElement).click();
+
+  const closeSideBarOnResize = () => {
+    if (window.innerWidth >= 768) {
+      closeSideBar();
+      window.removeEventListener("resize", closeSideBarOnResize);
+    }
+  };
+
   const handleButtonClick = (path: RoutePath) => {
-    const button = burgerRef.children[0];
-    (button as HTMLElement).click();
+    closeSideBar();
     navigate(path);
   };
 

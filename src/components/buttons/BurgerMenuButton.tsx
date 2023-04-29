@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import UseAnimations from "react-useanimations";
 import menu4 from "react-useanimations/lib/menu4";
-import { RoutePath } from "../../router";
+import { RoutePath } from "../../types/router";
 import useDarkMode from "../../stores/darkModeStore";
 import useSideBar from "../../stores/sideBarStore";
 import BurgerMenu from "../BurgerMenu";

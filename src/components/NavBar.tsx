@@ -1,4 +1,4 @@
-import { RoutePath, routerElements } from "../router";
+import { RoutePath, routerElements } from "../types/router";
 import useDarkMode from "../stores/darkModeStore";
 import SettingsButton from "./buttons/SettingsButton";
 

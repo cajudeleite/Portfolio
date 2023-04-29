@@ -12,7 +12,7 @@ const useDarkMode = create<DarkModeState>((set) => ({
       : window.matchMedia("(prefers-color-scheme: dark)").matches,
   toggleDarkMode: () =>
     set((state) => {
-      localStorage.setItem("theme", !state.darkMode ? "dark" : "light");
+      localStorage.setItem("theme", state.darkMode ? "light" : "dark");
       return { darkMode: !state.darkMode };
     }),
 }));
