@@ -22,13 +22,7 @@ const StrangeAttractor = ({ props }: { props: StrangeAttractorProps }) => {
     x = 0.1;
     y = 0;
     z = 0;
-
-    return () => {
-      points = [];
-      x = 0.1;
-      y = 0;
-      z = 0;
-    };
+    iterationsRef.current = 0;
   }, [props]);
 
   const setup = (p5: p5Types, canvasParentRef: Element) => {
