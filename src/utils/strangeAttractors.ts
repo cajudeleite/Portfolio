@@ -15,18 +15,18 @@ export const aizawa: StrangeAttractorProps = {
     },
 }
 
-export const lorenz: StrangeAttractorProps = {
-    name: "Lorenz",
+export const halvorsen: StrangeAttractorProps = {
+    name: "Halvorsen",
     strokeColor: [57, 155, 27],
-    scale: [11, 17],
+    scale: [27, 41],
     dx(x, y, z) {
-        return 10 * (y - x);
+        return (-1.89 * x) - (4 * y) - (4 * z) - (y ** 2);
     },
     dy(x, y, z) {
-        return (x * (28 - z) - y);
+        return (-1.89 * y) - (4 * z) - (4 * x) - (z ** 2);
     },
     dz(x, y, z) {
-        return (x * y - (8 / 3) * z)
+        return (-1.89 * z) - (4 * x) - (4 * y) - (x ** 2);
     },
 }
 
@@ -44,3 +44,18 @@ export const noseHoover: StrangeAttractorProps = {
         return (1.5 - y ** 2);
     },
 }
+
+// export const lorenz: StrangeAttractorProps = {
+//     name: "Lorenz",
+//     strokeColor: [57, 155, 27],
+//     scale: [11, 17],
+//     dx(x, y, z) {
+//         return 10 * (y - x);
+//     },
+//     dy(x, y, z) {
+//         return (x * (28 - z) - y);
+//     },
+//     dz(x, y, z) {
+//         return (x * y - (8 / 3) * z)
+//     },
+// }

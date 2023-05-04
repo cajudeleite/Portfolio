@@ -4,9 +4,9 @@ import AboutMe from "../pages/AboutMe";
 import Home from "../pages/Home";
 import Skills from "../pages/Skills";
 import WorkExperience from "../pages/WorkExperience";
-import { aizawa, lorenz, noseHoover } from "../utils/strangeAttractors";
+import { aizawa, halvorsen, noseHoover } from "../utils/strangeAttractors";
 
-export type RoutePath = "/" | "/about" | "/skill" | "/work";
+export type RoutePath = "/" | "/about" | "/skills" | "/work";
 
 type RouteElement = {
   element: React.ReactElement;
@@ -30,12 +30,12 @@ export const routerElements: RouterElements = {
     element: <AboutMe />,
     background: <StrangeAttractor props={aizawa} />,
     previousRoute: "/",
-    nextRoute: "/skill",
-    title: "About Me",
+    nextRoute: "/skills",
+    title: "About",
   },
-  "/skill": {
+  "/skills": {
     element: <Skills />,
-    background: <StrangeAttractor props={lorenz} />,
+    background: <StrangeAttractor props={halvorsen} />,
     previousRoute: "/about",
     nextRoute: "/work",
     title: "Skills",
@@ -43,8 +43,8 @@ export const routerElements: RouterElements = {
   "/work": {
     element: <WorkExperience />,
     background: <StrangeAttractor props={noseHoover} />,
-    previousRoute: "/skill",
-    title: "Work Experience",
+    previousRoute: "/skills",
+    title: "Work",
   },
   // "/playground": {
   //   element: <Playground />,
