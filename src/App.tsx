@@ -1,10 +1,13 @@
-import { StrictMode, useState } from "react";
+import { StrictMode, useState, useRef } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import BurgerMenuButton from "./components/buttons/BurgerMenuButton";
 import NavBar from "./components/NavBar";
 import SideBar from "./components/SideBar";
 import { RoutePath, routerElements } from "./router";
 import useDarkMode from "./stores/darkModeStore";
+import ScrollDownButton from "./components/buttons/ScrollDownButton";
+
+const SCROLL_COOLDOWN_MS = 3000;
 
 const App = () => {
   const { darkMode } = useDarkMode();
@@ -18,14 +21,19 @@ const App = () => {
   const [previousTouchPosition, setPreviousTouchPosition] = useState<
     number | null
   >(null);
+  const changedRoute = useRef<boolean>(false);
+  const lastRouteChangeTime = useRef<number>(0);
 
   const handleRouteChange = (route: RoutePath) => {
+    changedRoute.current = true;
     setPreviousRoute(currentRoute);
     navigate(route);
+    lastRouteChangeTime.current = Date.now();
     setTimeout(() => {
       setPreviousRoute(undefined);
       setCurrentRoute(route);
       setScrollUp(false);
+      changedRoute.current = false;
     }, 1000);
   };
 
@@ -42,6 +50,12 @@ const App = () => {
 
   const handleScroll = (deltaY: number) => {
     if (previousRoute) return;
+
+    // Verify scroll cooldown
+    const timeSinceLastChange = Date.now() - lastRouteChangeTime.current;
+    if (timeSinceLastChange < SCROLL_COOLDOWN_MS) {
+      return;
+    }
 
     const { previousRoute: prevRoute, nextRoute: nextRoute } =
       routerElements[currentRoute] || {};
@@ -93,6 +107,7 @@ const App = () => {
         </Routes>
       </section>
       {/* </StrictMode> */}
+      <ScrollDownButton color={darkMode ? "#ecece8" : "#093361"} changedRoute={changedRoute.current} onScrollDown={() => handleScroll(100)} />
     </div>
   );
 };
