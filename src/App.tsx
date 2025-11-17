@@ -89,16 +89,18 @@ const App = () => {
       </div>
       {/* <StrictMode> */}
       <section
-        className={`absolute top-0 h-screen flex flex-col justify-center mx-4 md:mx-12 ${
+        className={`absolute top-0 h-screen flex flex-col justify-center mx-4 md:mx-12 overflow-visible ${
           previousRoute ? (scrollUp ? "slide-out-bottom" : "slide-out-top") : ""
         }`}
+        style={{ overflow: 'visible' }}
       >
         {previousRoute && <>{routerElements[previousRoute].element}</>}
       </section>
       <section
-        className={`absolute top-0 min-h-screen flex flex-col justify-center mx-4 md:mx-12 ${
+        className={`absolute top-0 min-h-screen flex flex-col justify-center mx-4 md:mx-12 overflow-visible ${
           previousRoute ? (scrollUp ? "slide-in-top" : "slide-in-bottom") : ""
         }`}
+        style={{ overflow: 'visible' }}
       >
         <Routes>
           {Object.entries(routerElements).map(([path, { element }]) => (
@@ -107,7 +109,12 @@ const App = () => {
         </Routes>
       </section>
       {/* </StrictMode> */}
-      <ScrollDownButton color={darkMode ? "#ecece8" : "#093361"} changedRoute={changedRoute.current} onScrollDown={() => handleScroll(100)} />
+      <ScrollDownButton 
+        color={darkMode ? "#ecece8" : "#093361"} 
+        changedRoute={changedRoute.current} 
+        onScrollDown={() => handleScroll(100)}
+        currentRoute={currentRoute}
+      />
     </div>
   );
 };

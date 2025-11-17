@@ -3,16 +3,16 @@ import UseAnimations from "react-useanimations";
 import arrowDown from "react-useanimations/lib/arrowDown";
 import CircularText from "../bits/CircularText";
 
-const ScrollDownButton = ({ color, changedRoute, onScrollDown }: { color: string, changedRoute: boolean, onScrollDown: () => void }) => {
+const ScrollDownButton = ({ color, changedRoute, onScrollDown, currentRoute }: { color: string, changedRoute: boolean, onScrollDown: () => void, currentRoute: string }) => {
   const [isVisible, setIsVisible] = useState(false);
 	const [isHovered, setIsHovered] = useState(false);
-
+  
   useEffect(() => {
     setIsVisible(false);
     
     const timeout = setTimeout(() => {
       setIsVisible(true);
-    }, 5000);
+    }, currentRoute === "/aboutme" ? 50000 : 5000);
 
 
     return () => clearTimeout(timeout);

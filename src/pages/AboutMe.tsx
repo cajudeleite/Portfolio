@@ -3,19 +3,21 @@ import { paragraph, title } from "../utils/classNameLibrary";
 import TextType from "../components/bits/TextType";
 import RotatingText, { RotatingTextRef } from "../components/bits/RotatingText";
 import useDarkMode from "../stores/darkModeStore";
+import ponyo from "../assets/images/Ponyo.jpg";
+import rem from "../assets/images/Rem.jpg";
 
 const aboutMeText = [
   <>
-    In this section I will tell you a little about <span className="text-secondary font-medium">myself</span> and my <span className="text-primary font-medium">projects</span>, both <span className="text-secondary font-medium">professional</span> and <span className="text-primary font-medium">artistic</span>...
+    In this section I will tell you a little about myself and my projects, both professional and artistic...
   </>,
   <>
-    I'm 23 years old and I'm half <span className="text-secondary font-medium">brazilian</span> and half <span className="text-primary font-medium">french</span>. I'm currently living in <span className="text-secondary font-medium">Paris</span> and have two cats: <span className="text-primary font-medium">Ponyo</span> and <span className="text-secondary font-medium">Rem</span>...
+    I'm 23 years old and I'm half brazilian and half french. I'm currently living in Paris and have two cats: <span className="text-primary hover:underline font-medium relative inline-block group" style={{ overflow: 'visible' }}><span>Ponyo</span><img src={ponyo} alt="Ponyo" className="w-64 h-64 absolute top-full left-1/2 -translate-x-1/2 mt-2 hidden group-hover:block rounded-lg shadow-lg z-[100] pointer-events-none object-cover" style={{ minWidth: '16rem' }} /></span> and <span className="text-secondary hover:underline font-medium relative inline-block group" style={{ overflow: 'visible' }}><span>Rem</span><img src={rem} alt="Rem" className="w-64 h-64 absolute top-full left-1/2 -translate-x-1/2 mt-2 hidden group-hover:block rounded-lg shadow-lg z-[100] pointer-events-none object-cover" style={{ minWidth: '16rem' }} /></span>...
   </>,
   <>
-    I'm a <span className="text-secondary font-medium">full-stack</span> developer with <span className="text-primary font-medium">3+</span> years of experience with <span className="text-secondary font-medium">startups</span> and <span className="text-primary font-medium">freelancing</span>. I'm also a <span className="text-secondary font-medium">blockchain</span> enthusiast and have a passion for <span className="text-primary font-medium">web3</span> and <span className="text-secondary font-medium">crypto</span>. I'm currently working as a <span className="text-secondary font-medium">software engineer</span> at <span className="text-primary font-medium">Cena.art</span> and <span className="text-secondary font-medium">Mayya</span>...
+    I'm a full-stack developer with 3+ years of experience with startups and freelancing. I'm also a blockchain enthusiast and have a passion for web3 and crypto. I'm currently working as a software engineer at Cena.art and <a className="text-secondary hover:underline font-medium" href="https://mayya.com/" target="_blank">Mayya</a>...
   </>,
   <>
-    In the underground, I'm <span className="text-primary font-medium">Abazai</span>, a <span className="text-secondary font-medium">psycore</span> DJ and producer. I'm part of <span className="text-primary font-medium">Citrus Frequencies</span> label and am the founder of <span className="text-secondary font-medium">Abyzma</span> crew...
+    In the underground, I'm <a className="text-primary hover:underline font-medium" href="https://soundcloud.com/abazai" target="_blank">Abazai</a>, a psycore DJ and producer. I'm part of <a className="text-secondary hover:underline font-medium" href="https://citrusfrequencies.bandcamp.com/" target="_blank">Citrus Frequencies</a> label and am the founder of <a className="text-primary hover:underline font-medium" href="https://www.instagram.com/abyzmacrew/" target="_blank">Abyzma</a> crew...
   </>   
 ];
 
@@ -30,7 +32,7 @@ const AboutMe = () => {
         <RotatingText
           ref={rotatingTextRef}
           texts={["Me", "Nate", "Caju", "Abazai"]}
-          mainClassName={`w-fit px-2 sm:px-2 md:px-3 bg-primary overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg ${title} ${darkMode ? "text-dark" : "text-light"}`}
+          mainClassName={`w-fit px-2 sm:px-2 md:px-3 bg-secondary overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg ${title} ${darkMode ? "text-dark" : "text-light"}`}
           staggerFrom="first"
           initial={{ y: "100%" }}
           animate={{ y: 0 }}
@@ -42,16 +44,19 @@ const AboutMe = () => {
           auto={false}
         />
       </div>
-      <div className="relative w-[90dvw] md:w-[50dvw]">
-        <TextType 
-          text={aboutMeText} 
-          className="text-xl md:text-2xl absolute top-0 left-0"
-          typingSpeed={35}
-          deletingSpeed={15}
-          onSentenceComplete={() => {
-            rotatingTextRef.current?.next();
-          }}
-        />
+      <div className="relative w-[90dvw] md:w-[50dvw] overflow-visible" style={{ overflow: 'visible' }}>
+        <div className="overflow-visible" style={{ overflow: 'visible' }}>
+          <TextType 
+            text={aboutMeText} 
+            className="text-xl md:text-2xl absolute top-0 left-0 overflow-visible"
+            typingSpeed={35}
+            deletingSpeed={15}
+            onSentenceComplete={() => {
+              rotatingTextRef.current?.next();
+            }}
+            pauseDuration={5000}
+          />
+        </div>
       </div>
     </>
   );

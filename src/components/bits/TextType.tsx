@@ -414,7 +414,8 @@ const TextType = ({
     Component,
     {
       ref: containerRef,
-      className: `inline-block whitespace-pre-wrap tracking-tight ${className}`,
+      className: `inline-block whitespace-pre-wrap tracking-tight overflow-visible ${className}`,
+      style: { overflow: 'visible', ...props.style },
       ...props
     },
     renderContent(),
