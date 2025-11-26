@@ -23,7 +23,7 @@ const ScrollDownButton = ({ color, changedRoute, onScrollDown, currentRoute }: {
         onClick={onScrollDown} 
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className={`absolute bottom-4 left-1/2 transform -translate-x-1/2 cursor-pointer w-fit transition-opacity ${isVisible ? "duration-1000 opacity-100" : "duration-500 opacity-0"}`}>
+        className={`absolute z-20 bottom-4 left-1/2 transform -translate-x-1/2 cursor-pointer w-fit transition-opacity ${isVisible ? "duration-1000 opacity-100" : "duration-500 opacity-0"}`}>
 			<CircularText text="*SCROLL*DOWN" className="absolute" color={color} onHover="goBonkers" isHovered={isHovered} />
       <UseAnimations
         animation={arrowDown}

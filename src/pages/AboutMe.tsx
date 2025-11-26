@@ -11,7 +11,7 @@ const aboutMeText = [
     In this section I will tell you a little about myself and my projects, both professional and artistic...
   </>,
   <>
-    I'm 23 years old and I'm half brazilian and half french. I'm currently living in Paris and have two cats: <span className="text-primary hover:underline font-medium relative inline-block group" style={{ overflow: 'visible' }}><span>Ponyo</span><img src={ponyo} alt="Ponyo" className="w-64 h-64 absolute top-full left-1/2 -translate-x-1/2 mt-2 hidden group-hover:block rounded-lg shadow-lg z-[100] pointer-events-none object-cover" style={{ minWidth: '16rem' }} /></span> and <span className="text-secondary hover:underline font-medium relative inline-block group" style={{ overflow: 'visible' }}><span>Rem</span><img src={rem} alt="Rem" className="w-64 h-64 absolute top-full left-1/2 -translate-x-1/2 mt-2 hidden group-hover:block rounded-lg shadow-lg z-[100] pointer-events-none object-cover" style={{ minWidth: '16rem' }} /></span>...
+    I'm 23 years old and I'm half brazilian and half french. I'm currently living in Paris and have two cats: <span className="text-primary hover:underline font-medium relative inline-block group" style={{ overflow: 'visible' }}><span>Ponyo</span><img src={ponyo} alt="Ponyo" className="w-64 h-64 absolute top-full left-1/2 -translate-x-1/2 mt-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100 rounded-lg shadow-lg z-[100] pointer-events-none object-cover" style={{ minWidth: '16rem' }} /></span> and <span className="text-secondary hover:underline font-medium relative inline-block group" style={{ overflow: 'visible' }}><span>Rem</span><img src={rem} alt="Rem" className="w-64 h-64 absolute top-full left-1/2 -translate-x-1/2 mt-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100 rounded-lg shadow-lg z-[100] pointer-events-none object-cover" style={{ minWidth: '16rem' }} /></span>...
   </>,
   <>
     I'm a full-stack developer with 3+ years of experience with startups and freelancing. I'm also a blockchain enthusiast and have a passion for web3 and crypto. I'm currently working as a software engineer at Cena.art and <a className="text-secondary hover:underline font-medium" href="https://mayya.com/" target="_blank">Mayya</a>...
@@ -48,7 +48,7 @@ const AboutMe = () => {
         <div className="overflow-visible" style={{ overflow: 'visible' }}>
           <TextType 
             text={aboutMeText} 
-            className="text-xl md:text-2xl absolute top-0 left-0 overflow-visible"
+            className={`text-xl md:text-2xl absolute top-0 left-0 overflow-visible ${darkMode ? "bg-dark text-light" : "bg-light text-dark"}`}
             typingSpeed={35}
             deletingSpeed={15}
             onSentenceComplete={() => {

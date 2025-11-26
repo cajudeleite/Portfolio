@@ -81,7 +81,7 @@ const App = () => {
       <NavBar navigate={handleRouteChange} />
       <SideBar />
       <div
-        className={`absolute top-0 ${
+        className={`absolute top-0 z-0 ${
           previousRoute ? (scrollUp ? "fade-out-bottom" : "fade-out-top") : ""
         }`}
       >
@@ -89,7 +89,7 @@ const App = () => {
       </div>
       {/* <StrictMode> */}
       <section
-        className={`absolute top-0 h-screen flex flex-col justify-center mx-4 md:mx-12 overflow-visible ${
+        className={`absolute top-0 h-screen flex flex-col justify-center mx-4 md:mx-12 overflow-visible z-20 ${
           previousRoute ? (scrollUp ? "slide-out-bottom" : "slide-out-top") : ""
         }`}
         style={{ overflow: 'visible' }}
@@ -97,7 +97,7 @@ const App = () => {
         {previousRoute && <>{routerElements[previousRoute].element}</>}
       </section>
       <section
-        className={`absolute top-0 min-h-screen flex flex-col justify-center mx-4 md:mx-12 overflow-visible ${
+        className={`absolute top-0 min-h-screen flex flex-col justify-center mx-4 md:mx-12 overflow-visible z-20 ${
           previousRoute ? (scrollUp ? "slide-in-top" : "slide-in-bottom") : ""
         }`}
         style={{ overflow: 'visible' }}
