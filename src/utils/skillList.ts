@@ -1,19 +1,18 @@
 import { SkillType } from "../types/skill";
 
 const skills: SkillType[] = [
-  { name: "React", url: "https://react.dev/", color: "#149ECA" },
+  { name: "Rails", url: "https://rubyonrails.org/", color: "211, 0, 1" }, 
+  { name: "React", url: "https://react.dev/", color: "20, 158, 202" },
   {
     name: "TypeScript",
     url: "https://www.typescriptlang.org/",
-    color: "#3178C6",
+    color: "49, 120, 198",
   },
-  { name: "Solidity", url: "https://soliditylang.org/", color: "#002FA7" },
-  { name: "Flutter", url: "https://flutter.dev/", color: "#5FC9F8" },
-  { name: "Rails", url: "https://rubyonrails.org/", color: "#D30001" },
+  { name: "Solidity", url: "https://soliditylang.org/", color: "0, 47, 167" },
   {
     name: "C",
     url: "https://www.iso.org/standard/74528.html",
-    color: "#5D6AC0",
+    color: "93, 106, 192",
   },
 ];
 
