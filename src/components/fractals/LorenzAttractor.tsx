@@ -1,7 +1,8 @@
 import p5Types from "p5";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Sketch from "react-p5";
 import useFpsThreshold from "../../stores/fpsThresholdStore";
+import useDarkMode from "../../stores/darkModeStore";
 
 const iterationThreshold = 100;
 const sigma = 10;
@@ -14,11 +15,18 @@ let points: { x: number; y: number; z: number }[] = [];
 let scale: number;
 let angleY: number;
 
+const TRANSITION_DURATION_MS = 1000;
+
 const LorenzAttractor = () => {
   const { fpsThreshold } = useFpsThreshold();
+  const { darkMode } = useDarkMode();
   const iterationsRef = useRef(0);
+  const [showOverlay, setShowOverlay] = useState(false);
+  const p5InstanceRef = useRef<p5Types | null>(null);
+  const resetTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const setup = (p5: p5Types, canvasParentRef: Element) => {
+    p5InstanceRef.current = p5;
     p5.createCanvas(window.innerWidth, window.innerHeight, p5.WEBGL).parent(
       canvasParentRef
     );
@@ -26,6 +34,17 @@ const LorenzAttractor = () => {
     p5.frameRate(60);
     scale = p5.random(13, 17);
     angleY = p5.random(-p5.PI, p5.PI);
+  };
+
+  const resetFractal = (p5: p5Types) => {
+    x = 0.01;
+    y = 0;
+    z = 0;
+    points = [];
+    iterationsRef.current = 0;
+    scale = p5.random(13, 17);
+    angleY = p5.random(-p5.PI, p5.PI);
+    p5.background(0, 0, 0, 0);
   };
 
   const draw = (p5: p5Types) => {
@@ -54,18 +73,48 @@ const LorenzAttractor = () => {
     p5.endShape();
 
     const fps = p5.frameRate();
-    if (fps < fpsThreshold && iterationsRef.current > iterationThreshold) {
-      p5.noLoop();
+    if (fps < fpsThreshold && iterationsRef.current > iterationThreshold && !showOverlay) {
+      // Start fade in overlay
+      setShowOverlay(true);
+      
+      // Clear any existing timeout
+      if (resetTimeoutRef.current) {
+        clearTimeout(resetTimeoutRef.current);
+      }
+      
+      // Reset fractal after transition completes
+      resetTimeoutRef.current = setTimeout(() => {
+        if (p5InstanceRef.current) {
+          resetFractal(p5InstanceRef.current);
+        }
+        // Start fade out overlay
+        setTimeout(() => {
+          setShowOverlay(false);
+        }, 50); // Small delay to ensure reset is complete
+      }, TRANSITION_DURATION_MS);
     }
   };
 
   useEffect(() => {
     return () => {
       points = [];
+      if (resetTimeoutRef.current) {
+        clearTimeout(resetTimeoutRef.current);
+      }
     };
   }, []);
 
-  return <Sketch setup={setup} draw={draw} />;
+  return (
+    <div className="relative w-full h-full">
+      <Sketch setup={setup} draw={draw} />
+      {/* Overlay for smooth transition - positioned to cover only the background canvas */}
+      <div
+        className={`absolute top-0 left-0 w-full h-full z-10 transition-opacity duration-1000 ${
+          showOverlay ? "opacity-100" : "opacity-0 pointer-events-none"
+        } ${darkMode ? "bg-dark" : "bg-light"}`}
+      />
+    </div>
+  );
 };
 
 export default LorenzAttractor;
